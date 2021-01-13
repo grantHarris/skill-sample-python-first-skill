@@ -30,8 +30,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Hi! Welcome to lululemon Events."
-        reprompt_text = "How would you like to sweat today?"
+        speak_output = "Hi! Welcome to lululemon Events. How would you like to sweat today?"
+        reprompt_text = "Still there? What type of class would you like?"
 
         return (
             handler_input.response_builder
