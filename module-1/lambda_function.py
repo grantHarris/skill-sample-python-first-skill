@@ -54,11 +54,20 @@ class CaptureClassesIntentHandler(AbstractRequestHandler):
         city = slots["city"].value
         time = slots["time"].value
 
-        speak_output = 'Sure, getting {category} classes in {city} for {time}.'.format(
-            category=category,
-            city=city,
-            time=time
-        )
+        api = BookingApi('https://digcore-booking-srvc-prod.events.lllapi.com')
+        bookings, total = api.get(category=category, city=city)
+
+        if bookings:
+            booking = bookings[0]
+            speak_output = f"I found a {category} class for you! {booking['name']}"
+        else:
+            speak_output = f"Sorry, but I didn't find any {category} classes"
+
+        # speak_output = 'Sure, getting {category} classes in {city} for {time}.'.format(
+        #     category=category,
+        #     city=city,
+        #     time=time
+        # )
 
         return (
             handler_input.response_builder
